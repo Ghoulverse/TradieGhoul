@@ -60,8 +60,8 @@ module.exports = {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        'glow': '0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(168, 85, 247, 0.3)',
-        'glow-intense': '0 0 30px rgba(0, 212, 255, 0.8), 0 0 60px rgba(168, 85, 247, 0.5)',
+        'glow': '0 0 20px rgba(249, 115, 22, 0.5), 0 0 40px rgba(234, 179, 8, 0.3)',
+        'glow-intense': '0 0 30px rgba(249, 115, 22, 0.8), 0 0 60px rgba(234, 179, 8, 0.5)',
       },
       keyframes: {
         "accordion-down": {
@@ -85,12 +85,12 @@ module.exports = {
           "50%": { transform: "rotate(3deg)" },
         },
         "glow-pulse": {
-          "0%, 100%": { filter: "drop-shadow(0 0 10px #00d4ff) drop-shadow(0 0 20px #a855f7)" },
-          "50%": { filter: "drop-shadow(0 0 20px #00d4ff) drop-shadow(0 0 40px #a855f7)" },
+          "0%, 100%": { filter: "drop-shadow(0 0 10px #f97316) drop-shadow(0 0 20px #eab308)" },
+          "50%": { filter: "drop-shadow(0 0 20px #f97316) drop-shadow(0 0 40px #eab308)" },
         },
         "glow-intense": {
-          "0%, 100%": { filter: "drop-shadow(0 0 20px #00d4ff) drop-shadow(0 0 40px #a855f7)" },
-          "50%": { filter: "drop-shadow(0 0 35px #00d4ff) drop-shadow(0 0 70px #a855f7)" },
+          "0%, 100%": { filter: "drop-shadow(0 0 20px #f97316) drop-shadow(0 0 40px #eab308)" },
+          "50%": { filter: "drop-shadow(0 0 35px #f97316) drop-shadow(0 0 70px #eab308)" },
         },
         "blink": {
           "0%, 90%, 100%": { transform: "scaleY(1)" },

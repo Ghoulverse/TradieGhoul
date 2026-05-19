@@ -1,60 +1,53 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Twitter, Instagram, Youtube, ChevronDown, Droplets, Skull, Heart, Sparkles, ArrowRight, Gamepad2, Ghost, ExternalLink } from 'lucide-react';
+import {
+  Twitter, Instagram, Youtube, Gamepad2,
+  Ghost, Wrench, Hammer, Drill, HardHat, Cog,
+} from 'lucide-react';
 import { config } from '@/data/ghoul.config';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Cross-links are now driven by ghoul.config.ts
 const OTHER_GHOULS = config.crossLinks.filter((g) => g.id !== 'ghoulverse');
 const GHOULVERSE_LINK = config.crossLinks.find((g) => g.id === 'ghoulverse');
 
+const PRODUCT_ICONS = [Wrench, Hammer, Drill, HardHat, Cog];
+
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const meetRef = useRef<HTMLDivElement>(null);
+  const codeRef = useRef<HTMLDivElement>(null);
   const productRef = useRef<HTMLDivElement>(null);
-  const universeRef = useRef<HTMLDivElement>(null);
+  const crewRef = useRef<HTMLDivElement>(null);
   const gameRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
-  const heroGhostRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (heroTextRef.current) {
         gsap.from(heroTextRef.current.children, {
-          y: 40,
+          x: -50,
           opacity: 0,
-          duration: 1,
-          stagger: 0.2,
-          ease: 'power3.out',
-          delay: 0.5,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: 'power4.out',
+          delay: 0.3,
         });
       }
 
-      if (heroGhostRef.current) {
-        gsap.from(heroGhostRef.current, {
-          scale: 0,
-          opacity: 0,
-          duration: 1.2,
-          ease: 'elastic.out(1, 0.5)',
-          delay: 0.2,
-        });
-      }
-
-      const sections = [meetRef, productRef, universeRef, gameRef, ctaRef];
+      const sections = [codeRef, productRef, crewRef, gameRef, ctaRef];
       sections.forEach((ref) => {
         if (ref.current) {
           gsap.from(ref.current.querySelectorAll('.reveal'), {
             y: 30,
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.1,
+            duration: 0.6,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: ref.current,
-              start: 'top 75%',
+              start: 'top 80%',
               toggleActions: 'play none none none',
             },
           });
@@ -67,368 +60,371 @@ export default function Home() {
 
   return (
     <div className="relative font-inter">
-      {/* ===== TOP BAR ===== */}
-      <div className="fixed top-0 left-0 right-0 z-50 py-4 px-4">
+      {/* Grunge overlay */}
+      <div className="grunge-overlay" />
+
+      {/* ===== NAV ===== */}
+      <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8 border-b border-[#f97316]/10"
+        style={{ background: 'rgba(26, 26, 26, 0.95)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Ghost className="w-5 h-5 text-ghoul-cyan" />
-            <span className="font-oswald text-lg text-ghoul-cyan tracking-wider">{config.name}</span>
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 bg-[#f97316]" />
+            <span className="font-oswald text-sm tracking-[0.15em] uppercase text-[#e2e8f0]">
+              {config.name}
+            </span>
           </div>
           <a
             href={GHOULVERSE_LINK?.domain || 'https://www.ghoulverse.com'}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-ghoul-muted hover:text-ghoul-cyan transition-colors"
+            className="text-[10px] font-oswald tracking-[0.2em] uppercase text-[#9ca3af] hover:text-[#f97316] transition-colors"
           >
-            Enter the GHOULVERSE
-            <ExternalLink className="w-3 h-3" />
+            GHOULVERSE
           </a>
         </div>
-      </div>
+      </nav>
 
-      {/* ===== HERO SECTION ===== */}
+      {/* ===== HERO ===== */}
       <section
         ref={heroRef}
-        className="relative flex flex-col items-center justify-center min-h-[100dvh] px-4 overflow-hidden"
+        className="relative min-h-[100dvh] flex items-center px-4 md:px-8 overflow-hidden"
       >
-        <div ref={heroTextRef} className="flex flex-col items-center text-center z-10">
-          <img
-            ref={heroGhostRef}
-            src="/ghost_main.png"
-            alt={config.name}
-            className="w-32 h-32 md:w-48 md:h-48 object-contain mb-6 pointer-events-none select-none"
-            style={{
-              filter: 'drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.3))',
-            }}
-          />
+        {/* Industrial accent lines */}
+        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#f97316] via-[#f97316]/20 to-transparent opacity-30" />
+        <div className="absolute top-0 right-20 w-px h-32 bg-[#f97316]/20" />
 
-          <h1 className="font-oswald text-6xl md:text-8xl lg:text-9xl gradient-text leading-none tracking-wide mb-4">
-            {config.name}
-          </h1>
-
-          <p className="text-ghoul-muted text-lg md:text-xl font-light tracking-widest uppercase mb-8">
-            Your friendly neighborhood ectoplasm
-          </p>
-
-          <p className="text-ghoul-cyan/60 text-sm animate-pulse-hint tracking-wider">
-            Click me if you dare!
-          </p>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-subtle">
-          <ChevronDown className="w-8 h-8 text-ghoul-cyan/40" />
-        </div>
-      </section>
-
-      {/* ===== MEET THE GHOST ===== */}
-      <section ref={meetRef} className="relative py-24 md:py-32 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="reveal font-oswald text-4xl md:text-5xl gradient-text text-center mb-16">
-            Meet Your Mascot
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="reveal glass-card rounded-2xl p-6 text-center group hover:border-ghoul-cyan/30 transition-all duration-300 hover:-translate-y-2">
-              <div className="relative w-28 h-28 mx-auto mb-4">
-                <img
-                  src="/ghost_main.png"
-                  alt="Friendly"
-                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  style={{ filter: 'drop-shadow(0 0 10px rgba(0, 212, 255, 0.4))' }}
-                />
-              </div>
-              <h3 className="font-oswald text-2xl text-ghoul-cyan mb-2">Friendly</h3>
-              <p className="text-ghoul-muted text-sm leading-relaxed">
-                Always ready with a smile and a wave. The cutest ghost you'll ever meet!
-              </p>
+        <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div ref={heroTextRef} className="z-10 pt-20 md:pt-0">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-px bg-[#f97316]" />
+              <span className="text-[10px] font-oswald tracking-[0.3em] uppercase text-[#f97316]">
+                The Industrial Wastes
+              </span>
             </div>
 
-            <div className="reveal glass-card rounded-2xl p-6 text-center group hover:border-ghoul-purple/30 transition-all duration-300 hover:-translate-y-2">
-              <div className="relative w-28 h-28 mx-auto mb-4">
-                <img
-                  src="/ghost_wave.png"
-                  alt="Social"
-                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  style={{ filter: 'drop-shadow(0 0 10px rgba(168, 85, 247, 0.4))' }}
-                />
-              </div>
-              <h3 className="font-oswald text-2xl text-ghoul-purple mb-2">Social</h3>
-              <p className="text-ghoul-muted text-sm leading-relaxed">
-                Loves making new friends and spreading good vibes across the afterlife.
-              </p>
-            </div>
+            <h1 className="font-oswald text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight uppercase mb-6"
+              style={{ color: '#e2e8f0' }}>
+              Tradie
+              <span className="block text-[#f97316]">Ghoul</span>
+            </h1>
 
-            <div className="reveal glass-card rounded-2xl p-6 text-center group hover:border-red-400/30 transition-all duration-300 hover:-translate-y-2">
-              <div className="relative w-28 h-28 mx-auto mb-4">
-                <img
-                  src="/ghost_boo.png"
-                  alt="Spooky"
-                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                  style={{ filter: 'drop-shadow(0 0 10px rgba(239, 68, 68, 0.4))' }}
-                />
-              </div>
-              <h3 className="font-oswald text-2xl text-red-400 mb-2">Spooky</h3>
-              <p className="text-ghoul-muted text-sm leading-relaxed">
-                Don't make him mad... or type "boo". You've been warned.
-              </p>
+            <p className="text-[#9ca3af] text-base md:text-lg max-w-md mb-8 leading-relaxed">
+              {config.tagline}. Built tough for tough builds. No mess too industrial.
+            </p>
+
+            <div className="flex items-center gap-4">
+              <a
+                href="#code"
+                className="inline-flex items-center gap-2 px-6 py-3 font-oswald text-sm tracking-wider uppercase transition-all hover:scale-105"
+                style={{
+                  background: '#f97316',
+                  color: '#1a1a1a',
+                  clipPath: 'polygon(0 0, 100% 0, 95% 100%, 5% 100%)',
+                }}
+              >
+                Get to Work
+              </a>
+              <span className="text-[#9ca3af]/40 text-xs tracking-wider uppercase">
+                Click the ghoul
+              </span>
             </div>
           </div>
 
-          <div className="reveal glass-card rounded-2xl p-6 md:p-8">
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Droplets className="w-5 h-5 text-ghoul-cyan" />
-                  <span className="font-oswald text-3xl text-ghoul-cyan">∞</span>
-                </div>
-                <p className="text-ghoul-muted text-xs uppercase tracking-wider">Ectoplasm</p>
-              </div>
-              <div>
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Skull className="w-5 h-5 text-ghoul-purple" />
-                  <span className="font-oswald text-3xl text-ghoul-purple">1,337</span>
-                </div>
-                <p className="text-ghoul-muted text-xs uppercase tracking-wider">People Scared</p>
-              </div>
-              <div>
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Heart className="w-5 h-5 text-pink-400" />
-                  <span className="font-oswald text-3xl text-pink-400">100%</span>
-                </div>
-                <p className="text-ghoul-muted text-xs uppercase tracking-wider">Cuteness</p>
-              </div>
-            </div>
-          </div>
-
-          <p className="reveal text-center text-ghoul-muted/50 text-xs mt-8 tracking-wider">
-            Try double-clicking the ghost, pressing spacebar, or typing "boo"...
-          </p>
-        </div>
-      </section>
-
-      {/* ===== PRODUCTS TEASER ===== */}
-      <section ref={productRef} className="relative py-24 md:py-32 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="reveal font-oswald text-4xl md:text-5xl gradient-text mb-4">
-            Something {config.isLeader ? 'Gooey' : 'Magical'} is Coming...
-          </h2>
-          <p className="reveal text-ghoul-muted text-lg mb-16">Get ready for the drop.</p>
-
-          <div className="reveal flex items-center justify-center gap-8 md:gap-16 mb-16">
-            {config.products.slice(0, 3).map((product, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div
-                  className="w-20 h-20 md:w-28 md:h-28 rounded-full flex items-center justify-center mb-4"
-                  style={{
-                    background: 'rgba(10, 10, 18, 0.8)',
-                    border: '1px solid rgba(0, 212, 255, 0.15)',
-                    filter: product.comingSoon ? 'blur(2px)' : 'none',
-                  }}
-                >
-                  <span className="font-oswald text-2xl text-ghoul-muted/60">
-                    {product.comingSoon ? '???' : product.name.charAt(0)}
-                  </span>
-                </div>
-                <span className="text-ghoul-muted/40 text-xs tracking-wider">
-                  {product.comingSoon ? 'SOON' : product.name}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="reveal flex justify-center">
-            <div className="relative w-32 h-12">
-              <div
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-4 rounded-full"
-                style={{
-                  background: 'linear-gradient(180deg, #00d4ff, #a855f7)',
-                  animation: 'slime-drip 2s ease-in-out infinite',
-                }}
-              />
-              <div
-                className="absolute top-0 left-1/3 w-1 h-3 rounded-full"
-                style={{
-                  background: 'linear-gradient(180deg, #a855f7, #6366f1)',
-                  animation: 'slime-drip 2.5s ease-in-out infinite',
-                  animationDelay: '0.5s',
-                }}
-              />
-              <div
-                className="absolute top-0 left-2/3 w-1 h-5 rounded-full"
-                style={{
-                  background: 'linear-gradient(180deg, #00d4ff, #6366f1)',
-                  animation: 'slime-drip 1.8s ease-in-out infinite',
-                  animationDelay: '1s',
-                }}
-              />
+          <div className="hidden md:flex items-center justify-center h-[50vh] relative">
+            <div className="absolute w-64 h-64 border border-[#f97316]/10 rotate-45" />
+            <div className="absolute w-48 h-48 border border-[#f97316]/5 rotate-12" />
+            <div className="font-oswald text-[16rem] font-bold text-[#f97316] opacity-[0.03] select-none uppercase">
+              T
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== THE GHOULVERSE PORTAL ===== */}
-      <section ref={universeRef} className="relative py-24 md:py-32 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="reveal inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-[0.2em] uppercase border border-ghoul-purple/20 text-ghoul-purple bg-ghoul-purple/5 mb-4">
-              The Universe
-            </span>
-            <h2 className="reveal font-oswald text-4xl md:text-6xl gradient-text mb-4">
-              You Are Not Alone
+      {/* ===== CODE OF HONOR ===== */}
+      <section id="code" ref={codeRef} className="relative py-24 md:py-40 px-4 md:px-8 border-t border-[#f97316]/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="reveal">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-8 h-px bg-[#f97316]" />
+              <span className="text-[10px] font-oswald tracking-[0.3em] uppercase text-[#f97316]">
+                Code of Honor
+              </span>
+            </div>
+
+            <h2 className="font-oswald text-4xl md:text-6xl font-bold uppercase leading-tight mb-8"
+              style={{ color: '#e2e8f0' }}>
+              Built Tough
+              <span className="text-[#f97316]"> For Tough Builds</span>
             </h2>
-            <p className="reveal text-ghoul-muted max-w-2xl mx-auto">
-              {config.name} is just one of eight legendary entities in the GHOULVERSE.
-              Each realm has its own master. Discover them all.
+
+            <p className="text-[#9ca3af] text-lg leading-relaxed max-w-xl mb-6">
+              We don't do delicate. We don't do gentle. We handle the industrial-grade messes
+              that would break lesser entities. Concrete, grease, oil, rust — bring it on.
+            </p>
+            <p className="text-[#9ca3af]/70 leading-relaxed max-w-lg text-sm">
+              Every product is formulated for the workshop, the site, the shed.
+              No fancy fragrances. No soft promises. Just results.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== THE SHED (PRODUCTS) ===== */}
+      <section ref={productRef} className="relative py-24 md:py-40 px-4 md:px-8 border-t border-[#f97316]/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="reveal mb-12 md:mb-16">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-px bg-[#f97316]" />
+              <span className="text-[10px] font-oswald tracking-[0.3em] uppercase text-[#f97316]">
+                The Shed
+              </span>
+            </div>
+            <h2 className="font-oswald text-4xl md:text-5xl font-bold uppercase text-[#e2e8f0] mb-4">
+              Gear Up
+            </h2>
+            <p className="text-[#9ca3af] max-w-md text-sm">
+              Industrial-grade essentials. No fluff.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-12">
-            {OTHER_GHOULS.map((g) => (
-              <a
-                key={g.id}
-                href={g.live ? g.domain : `https://www.ghoulverse.com/ghouls/${g.id}/`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="reveal glass-card rounded-xl p-4 text-center group hover:border-ghoul-cyan/20 transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                  {g.icon}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#374151]/30">
+            {config.products.map((product, i) => {
+              const Icon = PRODUCT_ICONS[i % PRODUCT_ICONS.length];
+              const colors = ['#f97316', '#fbbf24', '#ef4444', '#eab308', '#9ca3af'];
+              const color = colors[i % colors.length];
+
+              return (
+                <div
+                  key={i}
+                  className="reveal group relative p-6 md:p-8 transition-all duration-300 hover:bg-[#262626]"
+                  style={{ background: 'rgba(26, 26, 26, 0.95)' }}
+                >
+                  <div className="flex items-start justify-between mb-5">
+                    <Icon className="w-5 h-5" style={{ color }} strokeWidth={1.5} />
+                    <span className="font-oswald text-xs tracking-wider" style={{ color: `${color}60` }}>
+                      GEAR-{String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <h3 className="font-oswald text-lg font-bold uppercase text-[#e2e8f0] mb-2 tracking-wide">
+                    {product.name}
+                  </h3>
+                  <p className="text-[#9ca3af] text-xs leading-relaxed">
+                    {product.description || 'Heavy-duty formulation. Industrial strength.'}
+                  </p>
+
+                  {product.comingSoon && (
+                    <div className="mt-4 pt-4 border-t border-[#374151]/50">
+                      <span className="text-[10px] font-oswald tracking-[0.2em] uppercase"
+                        style={{ color }}>
+                        On Order
+                      </span>
+                    </div>
+                  )}
                 </div>
-                <h3 className="font-oswald text-sm text-ghoul-text mb-0.5">{g.name}</h3>
-                <p className="text-ghoul-muted/60 text-[10px] uppercase tracking-wider">{g.realm}</p>
-                {!g.live && (
-                  <span className="text-[10px] text-ghoul-muted/40 uppercase tracking-wider">Via GHOULVERSE</span>
-                )}
-              </a>
-            ))}
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== THE CREW (UNIVERSE) ===== */}
+      <section ref={crewRef} className="relative py-24 md:py-40 px-4 md:px-8 border-t border-[#f97316]/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="reveal mb-12 md:mb-16">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-px bg-[#f97316]" />
+              <span className="text-[10px] font-oswald tracking-[0.3em] uppercase text-[#f97316]">
+                The Crew
+              </span>
+            </div>
+            <h2 className="font-oswald text-4xl md:text-5xl font-bold uppercase text-[#e2e8f0] mb-4">
+              The GHOULVERSE
+            </h2>
+            <p className="text-[#9ca3af] max-w-md text-sm">
+              Eight workers. One site.
+            </p>
           </div>
 
-          <div className="reveal text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-[#374151]/30">
+            {OTHER_GHOULS.map((g) => {
+              const isForeman = ['tradie', 'goo'].includes(g.id);
+
+              return (
+                <a
+                  key={g.id}
+                  href={g.live ? g.domain : `https://www.ghoulverse.com/ghouls/${g.id}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="reveal group relative p-5 md:p-6 text-center transition-all duration-300 hover:bg-[#262626]"
+                  style={{ background: 'rgba(26, 26, 26, 0.95)' }}
+                >
+                  {isForeman && (
+                    <span className="absolute top-2 right-2 text-[8px] font-oswald tracking-[0.15em] uppercase px-1.5 py-0.5"
+                      style={{ color: g.color, border: `1px solid ${g.color}40` }}>
+                      Foreman
+                    </span>
+                  )}
+
+                  <div className="text-2xl md:text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {g.icon}
+                  </div>
+
+                  <h3 className="font-oswald text-xs tracking-wider uppercase text-[#e2e8f0]">
+                    {g.name}
+                  </h3>
+                  <p className="text-[#9ca3af]/50 text-[10px] uppercase tracking-wider mt-1">
+                    {g.realm}
+                  </p>
+                  {!g.live && (
+                    <span className="text-[9px] text-[#9ca3af]/30 uppercase tracking-wider block mt-1">
+                      Off Site
+                    </span>
+                  )}
+                </a>
+              );
+            })}
+          </div>
+
+          <div className="reveal mt-12 text-center">
             <a
               href={GHOULVERSE_LINK?.domain || 'https://www.ghoulverse.com'}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-ghoul-bg tracking-wider uppercase transition-all hover:scale-105"
-              style={{ background: 'linear-gradient(135deg, #00d4ff, #a855f7, #ff00ff)' }}
+              className="inline-flex items-center gap-2 px-8 py-3 font-oswald text-sm tracking-wider uppercase transition-all hover:scale-105"
+              style={{
+                background: '#f97316',
+                color: '#1a1a1a',
+                clipPath: 'polygon(0 0, 100% 0, 95% 100%, 5% 100%)',
+              }}
             >
               Enter the GHOULVERSE
-              <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* ===== PLAY GOO RUNNER ===== */}
-      <section ref={gameRef} className="relative py-24 md:py-32 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="glass-card rounded-2xl p-8 md:p-16 text-center relative overflow-hidden" style={{ borderColor: 'rgba(0, 212, 255, 0.2)' }}>
-            <div
-              className="absolute -top-20 -left-20 w-64 h-64 rounded-full opacity-20 blur-3xl pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(0, 212, 255, 0.4), transparent 70%)' }}
-            />
-            <div
-              className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full opacity-20 blur-3xl pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(168, 85, 247, 0.4), transparent 70%)' }}
-            />
+      {/* ===== GAME ===== */}
+      <section ref={gameRef} className="relative py-24 md:py-40 px-4 md:px-8 border-t border-[#f97316]/10">
+        <div className="max-w-4xl mx-auto">
+          <div
+            className="reveal relative p-10 md:p-16 text-center overflow-hidden border border-[#f97316]/20"
+            style={{ background: 'rgba(26, 26, 26, 0.8)' }}
+          >
+            <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#f97316]/30" />
+            <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#f97316]/30" />
+            <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#f97316]/30" />
+            <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#f97316]/30" />
 
-            <Gamepad2 className="reveal w-12 h-12 text-ghoul-cyan mx-auto mb-6" />
-            <h2 className="reveal font-oswald text-4xl md:text-5xl gradient-text mb-4 relative z-10">
-              Play GOO RUNNER
+            <Gamepad2 className="reveal w-10 h-10 text-[#f97316] mx-auto mb-6" />
+
+            <h2 className="reveal font-oswald text-4xl md:text-5xl font-bold uppercase text-[#e2e8f0] mb-4 relative z-10">
+              Play GHOULVERSE
             </h2>
-            <p className="reveal text-ghoul-muted max-w-xl mx-auto mb-8 relative z-10">
-              Pilot {config.name} through the Void in this epic endless runner. Battle real bacteria,
-              unlock all 8 ghouls, and claim your place on the leaderboard.
+
+            <p className="reveal text-[#9ca3af] max-w-xl mx-auto mb-8 relative z-10 text-sm">
+              Pilot {config.name} through the Void in this epic endless runner.
+              Battle bacteria, unlock all 8 ghouls, and claim your place on the leaderboard.
             </p>
+
             <a
               href={config.gameUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="reveal relative z-10 inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-ghoul-bg tracking-wider uppercase transition-all hover:scale-105"
-              style={{ background: 'linear-gradient(135deg, #00d4ff, #a855f7)' }}
+              className="reveal relative z-10 inline-flex items-center gap-2 px-8 py-3 font-oswald text-sm tracking-wider uppercase transition-all hover:scale-105"
+              style={{
+                background: '#f97316',
+                color: '#1a1a1a',
+                clipPath: 'polygon(0 0, 100% 0, 95% 100%, 5% 100%)',
+              }}
             >
-              <Gamepad2 className="w-5 h-5" />
+              <Gamepad2 className="w-4 h-4" />
               Play Now
             </a>
           </div>
         </div>
       </section>
 
-      {/* ===== CTA / FOOTER ===== */}
-      <section ref={ctaRef} className="relative py-24 md:py-32 px-4">
+      {/* ===== FOOTER / CTA ===== */}
+      <section ref={ctaRef} className="relative py-24 md:py-40 px-4 md:px-8 border-t border-[#f97316]/10">
         <div className="max-w-lg mx-auto text-center">
-          <Sparkles className="reveal w-8 h-8 text-ghoul-gold mx-auto mb-6" />
-
-          <h2 className="reveal font-oswald text-4xl md:text-5xl gradient-text mb-4">
-            {config.cta.headline}
-          </h2>
-          <p className="reveal text-ghoul-muted mb-10">
-            {config.cta.subheadline}
-          </p>
+          <div className="reveal mb-8">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-8 h-px bg-[#f97316]" />
+              <span className="text-[10px] font-oswald tracking-[0.3em] uppercase text-[#f97316]">
+                Sign On
+              </span>
+              <div className="w-8 h-px bg-[#f97316]" />
+            </div>
+            <h2 className="font-oswald text-4xl md:text-5xl font-bold uppercase text-[#e2e8f0] mb-4">
+              {config.cta.headline}
+            </h2>
+            <p className="text-[#9ca3af] text-sm">
+              {config.cta.subheadline}
+            </p>
+          </div>
 
           <div className="reveal flex flex-col sm:flex-row gap-3 mb-16">
             <input
               type="email"
               placeholder={config.cta.placeholderText}
-              className="flex-1 px-5 py-3 rounded-xl text-ghoul-text placeholder:text-ghoul-muted/50 outline-none transition-all"
-              style={{
-                background: 'rgba(10, 10, 18, 0.8)',
-                border: '1px solid rgba(0, 212, 255, 0.2)',
-              }}
-              onFocus={(e) => { e.currentTarget.style.borderColor = 'rgba(0, 212, 255, 0.5)'; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(0, 212, 255, 0.2)'; }}
+              className="flex-1 px-5 py-3 text-sm text-[#e2e8f0] placeholder:text-[#6b7280] outline-none transition-all bg-transparent border border-[#374151] focus:border-[#f97316]"
             />
             <button
-              className="px-6 py-3 rounded-xl font-medium text-ghoul-bg transition-all hover:scale-105 hover:shadow-glow active:scale-95"
-              style={{ background: 'linear-gradient(135deg, #00d4ff, #a855f7)' }}
+              className="px-8 py-3 font-oswald text-sm tracking-wider uppercase transition-all hover:scale-105"
+              style={{
+                background: '#f97316',
+                color: '#1a1a1a',
+                clipPath: 'polygon(0 0, 100% 0, 95% 100%, 5% 100%)',
+              }}
             >
               {config.cta.buttonText}
             </button>
           </div>
 
           <div className="reveal flex items-center justify-center gap-4 mb-10">
-            {[Twitter, Instagram, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:border-ghoul-cyan/50"
-                style={{
-                  background: 'rgba(10, 10, 18, 0.8)',
-                  border: '1px solid rgba(100, 116, 139, 0.2)',
-                }}
-              >
-                <Icon className="w-4 h-4 text-ghoul-muted" />
-              </a>
-            ))}
+            {[Twitter, Instagram, Youtube].map((Icon, i) => {
+              const colors = ['#f97316', '#fbbf24', '#9ca3af'];
+              return (
+                <a
+                  key={i}
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center transition-all hover:scale-110 border"
+                  style={{
+                    borderColor: `${colors[i]}30`,
+                    background: 'rgba(26, 26, 26, 0.8)',
+                  }}
+                >
+                  <Icon className="w-4 h-4" style={{ color: colors[i] }} />
+                </a>
+              );
+            })}
           </div>
 
-          {/* Universe links */}
-          <div className="reveal mb-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
+          <div className="reveal mb-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs">
             <a
               href={GHOULVERSE_LINK?.domain || 'https://www.ghoulverse.com'}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ghoul-muted hover:text-ghoul-cyan transition-colors flex items-center gap-1"
+              className="text-[#9ca3af] hover:text-[#f97316] transition-colors flex items-center gap-1 tracking-wider"
             >
               <Ghost className="w-3 h-3" />
               Explore the GHOULVERSE
             </a>
-            <span className="text-ghoul-muted/30 hidden sm:inline">|</span>
+            <span className="text-[#374151] hidden sm:inline">|</span>
             <a
               href={config.gameUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ghoul-muted hover:text-ghoul-cyan transition-colors flex items-center gap-1"
+              className="text-[#9ca3af] hover:text-[#fbbf24] transition-colors flex items-center gap-1 tracking-wider"
             >
               <Gamepad2 className="w-3 h-3" />
-              Play GOO RUNNER
+              Play GHOULVERSE
             </a>
           </div>
 
-          <p className="reveal text-ghoul-muted/40 text-sm">
-            &copy; 2025 <span className="font-oswald text-ghoul-cyan/60">{config.name}</span> — All ectoplasm reserved.
-          </p>
-          <p className="reveal text-ghoul-muted/30 text-xs mt-2">
-            {config.name} is part of the <a href={GHOULVERSE_LINK?.domain || 'https://www.ghoulverse.com'} target="_blank" rel="noopener noreferrer" className="hover:text-ghoul-cyan transition-colors">GHOULVERSE</a>
+          <p className="reveal text-[#374151] text-xs tracking-wider">
+            &copy; 2025 <span className="font-oswald text-[#f97316]/60">{config.name}</span> — All rights reserved.
           </p>
         </div>
       </section>
