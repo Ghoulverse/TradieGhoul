@@ -55,6 +55,7 @@ export interface GhoulConfig {
   marketSize: string;
   traction: { label: string; value: string; status: 'complete' | 'in-progress' | 'upcoming' }[];
   ipStatus: string;
+  ipClasses: string[];
   roadmap: { phase: string; title: string; items: string[]; status: 'complete' | 'in-progress' | 'upcoming' }[];
 }
 
@@ -278,7 +279,13 @@ export const config: GhoulConfig = {
     { label: "Trademark", value: "IP Australia — Accepted", status: "complete" },
     { label: "Retail", value: "In Negotiation", status: "in-progress" },
   ],
-  ipStatus: "Trademark accepted — Class 3 (cleaning products). Independent brand filing complete.",
+  ipStatus: "Trademark filed — Class 7 (power tools & machines), Class 8 (hand tools) and Class 3 (industrial cleaning preparations).",
+  ipClasses: [
+    "Class 7 — Power tools, machines & industrial equipment",
+    "Class 8 — Hand tools, implements & trade hardware",
+    "Class 3 — Industrial cleaning preparations & degreasers",
+    "Class 37 — Repair, maintenance & construction services",
+  ],
   roadmap: [
     { phase: "Phase 1", title: "Brand Launch", items: ["6 sites live", "54 SKUs formulated", "GOO RUNNER game launched"], status: "complete" },
     { phase: "Phase 2", title: "Retail Partnerships", items: ["Total Tools", "Sydney Tools", "Trade supply wholesalers"], status: "in-progress" },
