@@ -4,8 +4,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Twitter, Instagram, Youtube, ArrowRight, Gamepad2,
   Ghost, ExternalLink, Wrench, HardHat, Cog, Zap,
+  Briefcase, Building2,
 } from 'lucide-react';
 import { config } from '@/data/ghoul.config';
+import TradieMascot from '@/components/TradieMascot';
+import TradieParticles from '@/components/TradieParticles';
+import EcosystemMap from '@/components/EcosystemMap';
+import MarketStats from '@/components/MarketStats';
+import IPBadge from '@/components/IPBadge';
+import RoadmapTimeline from '@/components/RoadmapTimeline';
+import InvestorCTA from '@/components/InvestorCTA';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,6 +48,10 @@ export default function Home() {
   const gameRef = useRef<HTMLDivElement>(null);
   const portfolioRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const ecosystemRef = useRef<HTMLDivElement>(null);
+  const marketRef = useRef<HTMLDivElement>(null);
+  const ipRef = useRef<HTMLDivElement>(null);
+  const roadmapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -64,7 +76,7 @@ export default function Home() {
       });
 
       // Scroll reveals — hard and fast
-      [statsRef, scienceRef, productRef, crewRef, gameRef, portfolioRef, ctaRef].forEach((ref) => {
+      [statsRef, scienceRef, productRef, crewRef, gameRef, portfolioRef, ctaRef, ecosystemRef, marketRef, ipRef, roadmapRef].forEach((ref) => {
         if (ref.current) {
           gsap.from(ref.current.querySelectorAll('.reveal'), {
             x: -40,
@@ -97,6 +109,8 @@ export default function Home() {
           backgroundSize: '100% 8px',
         }} />
 
+      <TradieParticles />
+
       {/* ===== NAV ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-3 px-4 md:px-8 border-b-2"
         style={{ borderColor: 'rgba(234,179,8,0.2)', background: 'rgba(26,26,26,0.95)', backdropFilter: 'blur(8px)' }}>
@@ -118,6 +132,9 @@ export default function Home() {
               className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-[#a3a3a3] hover:text-[#d97706] transition-colors">
               GHOULVERSE <ExternalLink className="w-3 h-3" />
             </a>
+            <a href="#ecosystem" className="hidden md:flex items-center gap-1.5 text-[10px] font-bold tracking-[0.2em] uppercase text-[#94a3b8] hover:text-[#eab308] transition-colors">
+              <Briefcase className="w-3 h-3" /> Investors
+            </a>
           </div>
         </div>
       </nav>
@@ -131,6 +148,14 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-20">
           <div className="lg:col-span-8 relative z-10">
+            <div className="hero-slam mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-bold tracking-[0.3em] uppercase border-2 text-[#eab308]"
+                style={{ borderColor: '#eab30840', background: 'rgba(234,179,8,0.05)' }}>
+                <Building2 className="w-3 h-3" />
+                House of GHOUL
+              </span>
+            </div>
+
             <div className="hero-slam mb-4">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-bold tracking-[0.3em] uppercase border-2 text-[#eab308]"
                 style={{ borderColor: '#eab30840', background: 'rgba(234,179,8,0.05)' }}>
@@ -169,7 +194,7 @@ export default function Home() {
               style={{ borderColor: '#eab30820', transform: 'rotate(3deg)' }}>
               <div className="absolute inset-2 border" style={{ borderColor: '#eab30810' }} />
               <div className="absolute inset-4 border" style={{ borderColor: '#eab30808' }} />
-              <span className="text-[8rem] opacity-[0.06]">{config.icon}</span>
+              <TradieMascot />
               {/* Rivets */}
               {[[0,0], [0,1], [1,0], [1,1]].map(([x, y], i) => (
                 <div key={i} className="absolute w-2 h-2 rounded-full bg-[#eab308]/20"
@@ -187,11 +212,12 @@ export default function Home() {
       {/* ===== STATS ===== */}
       <section ref={statsRef} className="relative py-20 md:py-32 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
             {[
               { label: 'TOOLS SAVED', value: '∞', color: '#eab308', sub: 'From the scrap heap' },
               { label: 'GREASE LEFT', value: '0', color: '#d97706', sub: 'Not a drop' },
               { label: 'RESTORATION', value: '100%', color: '#f97316', sub: 'Full recovery' },
+              { label: 'HOUSE OF GHOUL', value: '6', color: '#eab308', sub: 'Brands & counting' },
             ].map((stat, i) => (
               <div key={i} className="reveal relative p-8 md:p-12 text-center group"
                 style={{ border: `2px solid ${stat.color}30`, background: 'rgba(26,26,26,0.9)' }}
@@ -209,6 +235,20 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ===== ECOSYSTEM ===== */}
+      <section ref={ecosystemRef} id="ecosystem" className="relative py-24 md:py-40 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="reveal mb-12">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#eab308] mb-4 block">Ecosystem</span>
+            <h2 className="font-stencil text-4xl md:text-5xl text-white mb-4" style={{ textShadow: '0 0 20px rgba(255,255,255,0.05)' }}>
+              THE GHOULVERSE MAP
+            </h2>
+            <p className="text-[#a3a3a3] max-w-md">Every brand. Every realm. One connected universe.</p>
+          </div>
+          <EcosystemMap />
         </div>
       </section>
 
@@ -247,6 +287,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== IP ===== */}
+      <section ref={ipRef} className="relative py-24 md:py-40 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="reveal mb-12">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#eab308] mb-4 block">Intellectual Property</span>
+            <h2 className="font-stencil text-4xl md:text-5xl text-white mb-4" style={{ textShadow: '0 0 20px rgba(255,255,255,0.05)' }}>
+              PROTECTED IP
+            </h2>
+            <p className="text-[#a3a3a3] max-w-md">Registered trademarks across Australia and international jurisdictions.</p>
+          </div>
+          <IPBadge />
+        </div>
+      </section>
+
       {/* ===== PRODUCTS ===== */}
       <section ref={productRef} id="workshop" className="relative py-24 md:py-40 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
@@ -265,7 +319,7 @@ export default function Home() {
               const count = config.products.filter((p) => p.category === tab.key).length;
               return (
                 <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-                  className="px-5 py-2 text-xs font-bold tracking-wider uppercase transition-all"
+                  className="px-5 py-2 text-xs font-bold tracking-wider uppercase transition-all min-h-11"
                   style={{
                     background: isActive ? '#eab308' : 'transparent',
                     color: isActive ? '#1a1a1a' : '#a3a3a3',
@@ -314,7 +368,7 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <h3 className="font-stencil text-base text-white mb-1 tracking-wide uppercase">{product.name}</h3>
+                  <h3 className="font-stencil text-base text-white mb-1 tracking-wide uppercase break-words">{product.name}</h3>
                   <p className="text-[#eab308] text-xs font-bold mb-3">{product.tagline}</p>
                   <p className="text-[#a3a3a3] text-xs leading-relaxed mb-4">{product.description}</p>
 
@@ -342,6 +396,34 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ===== MARKET ===== */}
+      <section ref={marketRef} className="relative py-24 md:py-40 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="reveal mb-12">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#eab308] mb-4 block">Market Data</span>
+            <h2 className="font-stencil text-4xl md:text-5xl text-white mb-4" style={{ textShadow: '0 0 20px rgba(255,255,255,0.05)' }}>
+              MARKET STATS
+            </h2>
+            <p className="text-[#a3a3a3] max-w-md">Real numbers. Real growth. Real opportunity.</p>
+          </div>
+          <MarketStats />
+        </div>
+      </section>
+
+      {/* ===== ROADMAP ===== */}
+      <section ref={roadmapRef} className="relative py-24 md:py-40 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="reveal mb-12">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#eab308] mb-4 block">Roadmap</span>
+            <h2 className="font-stencil text-4xl md:text-5xl text-white mb-4" style={{ textShadow: '0 0 20px rgba(255,255,255,0.05)' }}>
+              THE BUILD PLAN
+            </h2>
+            <p className="text-[#a3a3a3] max-w-md">Milestones, launches, and what's coming next.</p>
+          </div>
+          <RoadmapTimeline />
         </div>
       </section>
 
@@ -443,11 +525,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== INVESTOR CTA ===== */}
+      <InvestorCTA />
+
       {/* ===== CTA / FOOTER ===== */}
       <section ref={ctaRef} className="relative py-24 md:py-40 px-4 md:px-8">
         <div className="max-w-2xl mx-auto text-center">
           <div className="reveal mb-8">
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#eab308] mb-4 block">Investor Relations</span>
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#eab308] mb-4 block">Stay in the Loop</span>
             <h2 className="font-stencil text-4xl md:text-5xl text-white mb-4" style={{ textShadow: '0 0 20px rgba(255,255,255,0.05)' }}>
               {config.cta.headline}
             </h2>
@@ -480,13 +565,18 @@ export default function Home() {
 
           <div className="reveal mb-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-mono">
             <a href={GHOULVERSE_LINK?.domain || '#'} target="_blank" rel="noopener noreferrer"
-              className="text-[#a3a3a3] hover:text-[#eab308] transition-colors flex items-center gap-1 tracking-wider">
+              className="text-[#a3a3a3] hover:text-[#eab308] transition-colors flex items-center gap-1 tracking-wider py-2 px-3 min-h-11">
               <Ghost className="w-3 h-3" /> Explore GHOULVERSE
             </a>
             <span className="text-[#a3a3a3]/20 hidden sm:inline">|</span>
             <a href={config.gameUrl} target="_blank" rel="noopener noreferrer"
-              className="text-[#a3a3a3] hover:text-[#f97316] transition-colors flex items-center gap-1 tracking-wider">
+              className="text-[#a3a3a3] hover:text-[#f97316] transition-colors flex items-center gap-1 tracking-wider py-2 px-3 min-h-11">
               <Gamepad2 className="w-3 h-3" /> Play GHOULVERSE
+            </a>
+            <span className="text-[#a3a3a3]/20 hidden sm:inline">|</span>
+            <a href="#ecosystem"
+              className="text-[#a3a3a3] hover:text-[#f59e0b] transition-colors flex items-center gap-1 tracking-wider py-2 px-3 min-h-11">
+              <Briefcase className="w-3 h-3" /> Investors
             </a>
           </div>
 
