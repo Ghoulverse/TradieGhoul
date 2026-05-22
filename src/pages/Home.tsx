@@ -116,11 +116,7 @@ export default function Home() {
         style={{ borderColor: 'rgba(234,179,8,0.2)', background: 'rgba(26,26,26,0.95)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 border-2 flex items-center justify-center relative overflow-hidden"
-              style={{ borderColor: '#eab308', boxShadow: 'inset 0 0 6px rgba(234,179,8,0.3)' }}>
-              <span className="text-base">{config.icon}</span>
-              <div className="spark absolute inset-0 bg-[#eab308]/30" />
-            </div>
+            <img src="/ghoul_logo.png" alt={config.name} className="w-9 h-9 object-contain" draggable={false} />
             <span className="font-stencil text-sm tracking-[0.3em] text-[#eab308] uppercase">{config.name}</span>
           </div>
           <div className="flex items-center gap-4">

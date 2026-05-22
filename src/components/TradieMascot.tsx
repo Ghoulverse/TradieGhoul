@@ -457,7 +457,7 @@ export default function TradieMascot() {
           onMouseLeave={() => setIsHovered(false)}
         >
           <img
-            src="/ghoul_logo.png"
+            src="/ghoul_mascot.png"
             alt="TRADIE GHOUL"
             className="w-full h-full object-contain"
             draggable={false}
