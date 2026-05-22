@@ -191,8 +191,8 @@ export default function TradieMascot() {
   const rafRef = useRef<number>(0);
   const clickCountRef = useRef(0);
   const typedRef = useRef('');
-
-  const mascotSize = typeof window !== 'undefined' && window.innerWidth < 768 ? 90 : 140;
+  const mascotSize = typeof window !== 'undefined' && window.innerWidth < 768 ? 180 : 280;
+  const cursorRef = useRef({ x, y, isMoving, velocity, mascotSize, fullSendMode });
 
   const spawnSparks = useCallback((cx: number, cy: number, count = 35) => {
     for (let i = 0; i < count; i++) {
@@ -274,6 +274,8 @@ export default function TradieMascot() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [x, y, spawnSparks]);
 
+  cursorRef.current = { x, y, isMoving, velocity, mascotSize, fullSendMode };
+
   // Animation loop
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -291,6 +293,7 @@ export default function TradieMascot() {
     let sparkTimer = 0;
 
     const animate = () => {
+      const { x, y, isMoving, velocity, mascotSize, fullSendMode } = cursorRef.current;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Sparks on movement
@@ -400,7 +403,7 @@ export default function TradieMascot() {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
     };
-  }, [x, y, isMoving, velocity, mascotSize, fullSendMode]);
+  }, []);
 
   return (
     <>
@@ -463,7 +466,7 @@ export default function TradieMascot() {
             draggable={false}
             style={{
               filter: isHovered
-                ? 'brightness(1.15) drop-shadow(0 0 20px rgba(249,115,22,0.5)) drop-shadow(0 0 40px rgba(234,179,8,0.3))'
+                ? 'brightness(1.15)'
                 : undefined,
               transition: 'filter 0.3s ease',
             }}
