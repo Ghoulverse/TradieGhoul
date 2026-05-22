@@ -322,7 +322,7 @@ export const config: GhoulConfig = {
     { label: "GHOULVERSE Game", value: "Live", status: "complete" },
     { label: "Brand Partnerships", value: "Seeking First Deals", status: "upcoming" },
   ],
-  ipStatus: "Trademark filed — Class 7 (power tools & machines), Class 8 (hand tools) and Class 3 (industrial cleaning preparations).",
+  ipStatus: "Trademark classes identified — Class 7 (power tools & machines), Class 8 (hand tools) and Class 3 (industrial cleaning preparations). Filing planned post-funding.",
   ipClasses: [
     "Class 7 — Power tools, machines & industrial equipment",
     "Class 8 — Hand tools, implements & trade hardware",

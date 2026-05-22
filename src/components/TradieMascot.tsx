@@ -33,7 +33,7 @@ const SPEECH_LINES = [
   "Hard yakka!",
 ];
 
-function TradieGhostSVG({ expression, isHovered }: {
+export function TradieGhostSVG({ expression, isHovered }: {
   expression: number;
   isHovered: boolean;
 }) {
@@ -180,7 +180,7 @@ function TradieGhostSVG({ expression, isHovered }: {
 
 export default function TradieMascot() {
   const { x, y, isMoving, velocity } = useTradieCursor();
-  const [expression, setExpression] = useState(0);
+  const [_expression, setExpression] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [speechBubble, setSpeechBubble] = useState('');
   const [fullSendMode, setFullSendMode] = useState(false);
@@ -456,7 +456,18 @@ export default function TradieMascot() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <TradieGhostSVG expression={expression} isHovered={isHovered} />
+          <img
+            src="/ghoul_logo.png"
+            alt="TRADIE GHOUL"
+            className="w-full h-full object-contain"
+            draggable={false}
+            style={{
+              filter: isHovered
+                ? 'brightness(1.15) drop-shadow(0 0 20px rgba(249,115,22,0.5)) drop-shadow(0 0 40px rgba(234,179,8,0.3))'
+                : undefined,
+              transition: 'filter 0.3s ease',
+            }}
+          />
         </div>
       </div>
     </>
