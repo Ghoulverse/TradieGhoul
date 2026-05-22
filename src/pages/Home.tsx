@@ -7,7 +7,6 @@ import {
   Briefcase, Building2,
 } from 'lucide-react';
 import { config } from '@/data/ghoul.config';
-import TradieMascot from '@/components/TradieMascot';
 import TradieParticles from '@/components/TradieParticles';
 import EcosystemMap from '@/components/EcosystemMap';
 import MarketStats from '@/components/MarketStats';
@@ -190,7 +189,7 @@ export default function Home() {
               style={{ borderColor: '#eab30820', transform: 'rotate(3deg)' }}>
               <div className="absolute inset-2 border" style={{ borderColor: '#eab30810' }} />
               <div className="absolute inset-4 border" style={{ borderColor: '#eab30808' }} />
-              <TradieMascot />
+              <img src="/ghoul_mascot.png" alt="TradieGhoul mascot" className="w-full h-full object-contain" draggable={false} style={{ animation: 'ghost-bob 2.5s ease-in-out infinite, ghost-sway 3.5s ease-in-out infinite' }} />
               {/* Rivets */}
               {[[0,0], [0,1], [1,0], [1,1]].map(([x, y], i) => (
                 <div key={i} className="absolute w-2 h-2 rounded-full bg-[#eab308]/20"
