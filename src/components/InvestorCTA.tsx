@@ -35,13 +35,16 @@ export default function InvestorCTA() {
                 <Mail className="w-4 h-4" />
                 {config.cta.buttonText}
               </a>
-              <button
+              <a
+                href="https://www.ghoulverse.com/investors?from=tradie"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 font-bungee text-sm tracking-wider uppercase text-white transition-all hover:scale-105 border-2 border-[#d97706]/40 hover:border-[#d97706]"
                 style={{ background: 'rgba(217,119,6,0.08)' }}
               >
                 <Download className="w-4 h-4 text-[#d97706]" />
-                Download Deck
-              </button>
+                View Investor Deck
+              </a>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-4 text-[#94a3b8]/60 text-xs">
