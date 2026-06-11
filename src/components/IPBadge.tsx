@@ -47,7 +47,7 @@ export default function IPBadge() {
           <div className="grid grid-cols-1 gap-4">
             {[
               { icon: Lock, title: 'Brand Lockup', desc: 'Logo, name, and character design mapped for trademark protection across target classes.', color: '#ff00ff' },
-              { icon: Globe, title: 'International Strategy', desc: 'US, UK, and EU trademark filings planned for Phase 3.', color: '#00f0ff' },
+              { icon: Globe, title: 'International Strategy', desc: 'US, UK, and EU trademark filings planned for Phase 3.', color: '#eab308' },
               { icon: Shield, title: 'Character IP', desc: 'Each ghoul is a distinct character with product-line, game, and merch potential.', color: '#f59e0b' },
             ].map((item) => (
               <div key={item.title} className="glass rounded-xl p-5 flex items-start gap-4">
@@ -81,7 +81,7 @@ export default function IPBadge() {
           </div>
           <div className="w-px h-4 bg-white/10" />
           <div className="flex items-center gap-2 text-[#94a3b8] text-xs">
-            <Shield className="w-4 h-4 text-[#00f0ff]" />
+            <Shield className="w-4 h-4 text-[#eab308]" />
             <span>11 TM Filings Planned</span>
           </div>
         </div>
