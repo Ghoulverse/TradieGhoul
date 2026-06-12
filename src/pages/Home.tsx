@@ -481,7 +481,7 @@ export default function Home() {
             <h2 className="font-stencil text-4xl md:text-6xl text-white mb-4" style={{ textShadow: '0 0 20px rgba(234,179,8,0.2)' }}>
               PLAY GHOULVERSE
             </h2>
-            <p className="text-[#a3a3a3] max-w-xl mx-auto mb-8">Pilot {config.name} through the Void. Battle bacteria, unlock all 8 ghouls, claim the leaderboard.</p>
+            <p className="text-[#a3a3a3] max-w-xl mx-auto mb-8">Pilot {config.name} through the Void. Race through the Void, unlock every ghoul, claim the leaderboard.</p>
             <a href={config.gameUrl} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 font-stencil text-sm tracking-wider uppercase text-[#1a1a1a] transition-all hover:scale-105"
               style={{ background: 'linear-gradient(135deg, #eab308, #d97706)', boxShadow: '0 0 30px rgba(234,179,8,0.4)' }}>

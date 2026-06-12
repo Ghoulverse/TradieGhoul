@@ -69,9 +69,8 @@ export interface GhoulConfig {
 export const config: GhoulConfig = {
   id: "tradie",
   name: "TRADIE GHOUL",
-  tagline: "Industrial Strength Spirit",
-  description:
-    "Built tough for tough builds. TRADIE GHOUL handles the industrial-grade messes that would break lesser entities.",
+  tagline: "Built Tough, Built Smart",
+  description: "The hardware, power-tool, and workwear vertical. TRADIE GHOUL champions products that survive the job site — then builds better ones.",
   domain: "https://www.tradieghoul.com",
   icon: "🔧",
   isLeader: false,
@@ -278,7 +277,7 @@ export const config: GhoulConfig = {
     },
     {
       id: "scholar",
-      name: "SCHOLAR GHOUL",
+      name: "BOOK GHOUL",
       domain: "https://www.ghoulverse.com/ghouls/scholar/",
       icon: "📚",
       color: "#f97316",
@@ -304,7 +303,7 @@ export const config: GhoulConfig = {
     title: "The Science",
     subtitle: "Industrial Ectoplasm™",
     description: "Every TRADIE GHOUL product is powered by Industrial Ectoplasm™ — a proprietary enzyme complex engineered for maximum molecular aggression. This technology breaks down petroleum, concrete, rust, and industrial contaminants at the chemical level.",
-    adaptation: "For the Industrial Wastes, we developed a maximum-strength variant that doesn't flinch at concrete, grease, or rust. It's the same core technology — just dialled up to the limits of chemical engineering.",
+    adaptation: "For the Industrial Wastes, we build heavy-duty, biodegradable solutions that cut through worksite grime while being safer for the user and the environment.",
     stats: [
       { label: "Grease Cut Speed", value: "< 10 sec" },
       { label: "Concrete Penetration", value: "5mm" },
@@ -312,8 +311,7 @@ export const config: GhoulConfig = {
       { label: "Industrial Certification", value: "ISO 9001" },
     ],
   },
-
-  marketSize: "$180B global industrial cleaning market",
+  marketSize: "$1.2T global construction, hardware & industrial supplies market",
   traction: [
     { label: "Character Websites", value: "10 Live", status: "complete" },
     { label: "GOO GHOUL™ Trademark", value: "IP Australia — Accepted", status: "complete" },
@@ -333,7 +331,7 @@ export const config: GhoulConfig = {
     { phase: "Phase 2", title: "Mascot Creation", items: ["24 professional mascots (2 per ghoul)", "$120K investment across 12 characters"], status: "upcoming" },
     { phase: "Phase 3", title: "Partnerships & Revenue", items: ["Sector sponsorships", "Affiliate deals", "Event appearances", "Influencer recruitment"], status: "upcoming" },
     { phase: "Phase 4", title: "Entertainment Scale", items: ["Animated series pilot", "Convention circuit", "Merchandise licensing"], status: "upcoming" },
-    { phase: "Phase 5", title: "Product Launch", items: ["GOO GHOUL household cleaners", "Vertical-specific product lines"], status: "upcoming" },
+    { phase: "Phase 5", title: "Product Launch", items: ["GOO GHOUL flagship household line", "Vertical-specific owned product lines"], status: "upcoming" },
   ],
 
   fundingAsk: "$250,000 AUD",
@@ -358,6 +356,6 @@ export const config: GhoulConfig = {
     { stream: "Licensing", description: "Character IP licensing to brands", timeline: "Year 2" },
     { stream: "Merchandise", description: "Royalties on plush, apparel, accessories", timeline: "Year 2" },
     { stream: "Animation", description: "YouTube/streaming ad revenue, distribution deals", timeline: "Year 2" },
-    { stream: "Products", description: "Owned product lines (GOO GHOUL cleaners first)", timeline: "Year 3" },
+    { stream: "Products", description: "Owned product lines launched per vertical, starting with GOO GHOUL", timeline: "Year 3" },
   ],
 };
